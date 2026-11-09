@@ -1,0 +1,138 @@
+{
+ "atualizado_em": "2026-11-09T18:45:00-03:00",
+ "fonte": "snapshot inicial",
+ "eventos": [
+  {
+   "id": "s363ea0",
+   "nome": "A Night To Remember - CURITIBA - 20 Anos de High School Musical - R. Mateus Leme, 1719",
+   "inicio": "2026-11-14T22:00:00-03:00",
+   "fim": "2026-11-15T05:00:00-03:00",
+   "publicado": true,
+   "cancelado": false,
+   "cidade": "Curitiba",
+   "local": "Versus Club ",
+   "link": ""
+  },
+  {
+   "id": "s36d033",
+   "nome": "Estreia: Nostalgias 2000 - Edição SANTOS - SÁBADO 14/11 - Rua do Comércio, 14",
+   "inicio": "2026-11-14T23:00:00-03:00",
+   "fim": "2026-11-15T05:00:00-03:00",
+   "publicado": true,
+   "cancelado": false,
+   "cidade": "Santos",
+   "local": "Casa Mônaco",
+   "link": ""
+  },
+  {
+   "id": "s373230",
+   "nome": "ESTREIA: Nostalgias 2010 RIO DE JANEIRO - SÁBADO na UP Turn: Rua Sacadura Cabral, 147",
+   "inicio": "2026-11-14T23:00:00-03:00",
+   "fim": "2026-11-15T05:00:00-03:00",
+   "publicado": true,
+   "cancelado": false,
+   "cidade": "Rio de Janeiro",
+   "local": "UP Turn",
+   "link": ""
+  },
+  {
+   "id": "s36bb01",
+   "nome": "Nostalgias 2000 SÃO PAULO - Especial 2010 na Véspera de Feriado - Kat Klub: Rua Augusta, 609",
+   "inicio": "2026-11-19T22:00:00-03:00",
+   "fim": "2026-11-20T06:00:00-03:00",
+   "publicado": false,
+   "cancelado": false,
+   "cidade": "São Paulo",
+   "local": "Augusta Hi-Fi",
+   "link": ""
+  },
+  {
+   "id": "s36bb03",
+   "nome": "Nostalgias 2000 SÃO PAULO - Especial 2010 na Véspera de Feriado - Kat Klub: Rua Augusta, 609",
+   "inicio": "2026-11-19T22:00:00-03:00",
+   "fim": "2026-11-20T06:00:00-03:00",
+   "publicado": true,
+   "cancelado": false,
+   "cidade": "São Paulo",
+   "local": "Kat Klub",
+   "link": ""
+  },
+  {
+   "id": "s36b141",
+   "nome": "Festa do Michael Jackson em Belo Horizonte - DOM: Avenida Barbacena, 33",
+   "inicio": "2026-11-20T23:00:00-03:00",
+   "fim": "2026-11-21T05:00:00-03:00",
+   "publicado": true,
+   "cancelado": false,
+   "cidade": "Belo Horizonte",
+   "local": "DOM Multieventos",
+   "link": ""
+  },
+  {
+   "id": "s36c757",
+   "nome": "A Night To Remember - HSM vs CAMP ROCK  - Edição MARINGÁ na B.COOL",
+   "inicio": "2026-11-20T23:00:00-03:00",
+   "fim": "2026-11-21T05:00:00-03:00",
+   "publicado": false,
+   "cancelado": false,
+   "cidade": "Belo Horizonte",
+   "local": "Estação Gueto",
+   "link": ""
+  },
+  {
+   "id": "s36c760",
+   "nome": "A Night To Remember - HSM vs CAMP ROCK  - Edição MARINGÁ na B.COOL",
+   "inicio": "2026-11-20T23:00:00-03:00",
+   "fim": "2026-11-21T05:00:00-03:00",
+   "publicado": true,
+   "cancelado": false,
+   "cidade": "Maringá",
+   "local": "B.Cool Maringá ",
+   "link": ""
+  },
+  {
+   "id": "s36d71d",
+   "nome": "A Night To Remember - HSM vs CAMP ROCK  - Edição BRASÍLIA no ANEXO BZ (SAAN, Q2, 45)",
+   "inicio": "2026-11-27T21:00:00-03:00",
+   "fim": "2026-11-28T04:00:00-03:00",
+   "publicado": true,
+   "cancelado": false,
+   "cidade": "Brasília",
+   "local": "Anexo BZ",
+   "link": ""
+  },
+  {
+   "id": "s376df9",
+   "nome": "A Night To Remember edição RIO DE JANEIRO - R. Sacadura Cabral, 147",
+   "inicio": "2026-12-04T23:00:00-03:00",
+   "fim": "2026-12-05T05:00:00-03:00",
+   "publicado": true,
+   "cancelado": false,
+   "cidade": "Rio de Janeiro",
+   "local": "UP TURN (Novo Endereço - Centro RJ)",
+   "link": ""
+  },
+  {
+   "id": "s37743c",
+   "nome": "A Night To Remember SÃO PAULO - Especial EX-ACTS - The Atro: Rua Rui Barbosa, 201",
+   "inicio": "2026-12-12T23:00:00-03:00",
+   "fim": "2026-12-13T05:00:00-03:00",
+   "publicado": true,
+   "cancelado": false,
+   "cidade": "São Paulo",
+   "local": "THE ATRO",
+   "link": ""
+  },
+  {
+   "id": "s374863",
+   "nome": "Nostalgias 2000 A Festa: RÉVEILLON OPEN BAR 2027 - Edição SÃO PAULO - Rua Augusta, 591",
+   "inicio": "2026-12-31T22:00:00-03:00",
+   "fim": "2027-01-01T06:00:00-03:00",
+   "publicado": true,
+   "cancelado": false,
+   "cidade": "São Paulo",
+   "local": "Augusta Hi-Fi",
+   "link": ""
+  }
+ ]
+}
