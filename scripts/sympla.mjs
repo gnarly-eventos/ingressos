@@ -68,6 +68,7 @@ try {
   const mudou = JSON.stringify(atual.eventos || []) !== JSON.stringify(eventos);
   await writeFile(ARQUIVO, JSON.stringify({ atualizado_em: new Date().toISOString(), fonte: "sympla", eventos }, null, 1) + "\n");
   console.log(`${eventos.length} eventos da ANTR e do Nostalgias gravados${mudou ? " (com mudanças)" : ""}.`);
+  for (const e of eventos) console.log(`  ${e.inicio.slice(0, 16)} | ${e.cidade} | ${e.local} | id ${e.id} | ${e.link || "(sem link)"} | ${e.nome}`);
 } catch (err) {
   aviso(`${err.message} Mantendo o eventos.json atual.`);
 }
