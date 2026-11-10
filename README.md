@@ -2,7 +2,7 @@
 
 Página de links da bio: **https://ingressos.gnarlyeventos.com.br/**
 
-- Direto na A Night To Remember: `https://ingressos.gnarlyeventos.com.br/antr` (página própria, `antr.html`, visual de canal de TV; o endereço antigo `/#antr` leva para ela)
+- Direto na A Night To Remember: `https://ingressos.gnarlyeventos.com.br/antr` (página própria, `antr.html`, visual de colégio; o endereço antigo `/#antr` leva para ela)
 - Direto no Nostalgias 2000: `https://ingressos.gnarlyeventos.com.br/#nostalgias`
 
 ## Como os eventos atualizam
