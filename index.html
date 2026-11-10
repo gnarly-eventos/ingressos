@@ -244,6 +244,13 @@ a{color:inherit}
 .ev-list{list-style:none;margin:0;padding:6px 10px 4px;display:flex;flex-direction:column}
 .ev{display:grid;grid-template-columns:58px minmax(0,1fr);gap:12px;padding:12px 2px;border-bottom:1px dashed rgba(0,0,0,.18)}
 .ev:last-child{border-bottom:0}
+/* evento em destaque (Réveillon ou "destaque": true no ajustes.json) */
+.ev.destaque{position:relative;margin:14px 0 8px;padding:20px 10px 12px;border:3px solid var(--n-brown);border-radius:12px;background:var(--n-yellow);box-shadow:5px 5px 0 var(--n-brown)}
+.ev.destaque .faixa{position:absolute;left:10px;top:-13px;padding:4px 10px 3px;border:2px solid var(--n-brown);border-radius:999px;background:var(--n-red);color:#fff;font-family:var(--f-nost);font-size:12px;letter-spacing:.04em;transform:rotate(-2deg);animation:pisca-dest 1.6s ease-in-out infinite alternate}
+@keyframes pisca-dest{to{transform:rotate(1deg) scale(1.06)}}
+.desk[data-festa="antr"] .ev.destaque{border:1px solid var(--antr-gold);background:#fdf1cf;box-shadow:0 0 0 3px rgba(226,176,74,.25)}
+.desk[data-festa="antr"] .ev.destaque .faixa{font-family:var(--f-antr);font-weight:700;background:#221e5c;color:var(--antr-gold-hi);border:1px solid var(--antr-gold)}
+@media (prefers-reduced-motion:reduce){.ev.destaque .faixa{animation:none}}
 .date{border-radius:8px;text-align:center;padding:6px 0 7px;display:flex;flex-direction:column;align-items:center;line-height:1;align-self:start;font-variant-numeric:tabular-nums}
 .date .d{font-size:24px}
 .date .m{font-size:11px;font-weight:900;letter-spacing:.08em;margin-top:3px}
@@ -479,7 +486,7 @@ const FESTAS = {
       canalInsta: "https://www.instagram.com/channel/AbaIaItfar2us_1I/",
       tiktok: "https://www.tiktok.com/@d1sneypartybr",
       instagram: "https://www.instagram.com/d1sneypartybr",
-      x: "https://x.com/disneypartybr"
+      x: "https://x.com/d1sneypartybr"
     }
   },
   nost: {
@@ -530,6 +537,7 @@ function limparTitulo(ev){
   let s = ev.nome;
   const estreia = /^\s*estreia\s*:/i.test(s);
   const anos2010 = /nostalgias 2010|especial 2010|anos 2010/i.test(s);
+  const reveillon = /r[eé]veillon|ano novo/i.test(s);
   s = s.replace(/^\s*estreia\s*:\s*/i, "");
   s = s.replace(/\s*\((?:SAAN|R\.|Rua|Av\.?|Avenida)[^)]*\)/gi, "");          // endereço entre parênteses
   s = s.replace(/\s*[-–:]\s*(?:R\.|Rua|Av\.|Avenida)\s.*$/i, "");               // " - R. ...", ": Rua ..."
@@ -543,7 +551,7 @@ function limparTitulo(ev){
   const cid = escRe(ev.cidade.trim());
   s = s.replace(new RegExp("(?:edi[cç][aã]o\\s+|em\\s+)?" + cid, "i"), "");
   s = s.replace(/(\s*[-–:]\s*){2,}/g, " - ").replace(/^[\s\-–:]+|[\s\-–:]+$/g, "").replace(/\s{2,}/g, " ");
-  return { titulo: s, estreia, anos2010 };
+  return { titulo: s, estreia, anos2010, reveillon };
 }
 function eventosDa(festa){
   const agora = Date.now();
@@ -742,7 +750,9 @@ function corpoIngressos(){
       el("a", {class:"buy" + (esgotado ? " off" : ""), href: e.link || linkSympla(e.id), target:"_blank", rel:"noopener", "aria-disabled": esgotado ? "true" : null,
         onclick:() => track("clique_ingresso", {festa, cidade:e.cidade, evento_id:e.id})}, esgotado ? "Esgotado" : "Comprar ↗")
     );
-    ul.append(el("li", {class:"ev"},
+    const dest = e.reveillon || e.destaque;
+    ul.append(el("li", {class:"ev" + (dest ? " destaque" : "")},
+      dest ? el("span", {class:"faixa"}, e.reveillon ? "★ Réveillon" : "★ Destaque") : null,
       el("div", {class:"date", "aria-label": fmt(ini, {weekday:"long", day:"numeric", month:"long"})},
         el("span", {class:"d"}, dia), el("span", {class:"m"}, mes), el("span", {class:"w"}, sem)),
       el("div", {class:"ev-main"},

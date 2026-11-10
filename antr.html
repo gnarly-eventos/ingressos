@@ -383,7 +383,7 @@ var LINKS={
   canalInsta:"https://www.instagram.com/channel/AbaIaItfar2us_1I/",
   tiktok:"https://www.tiktok.com/@d1sneypartybr",
   instagram:"https://www.instagram.com/d1sneypartybr",
-  x:"https://x.com/disneypartybr"
+  x:"https://x.com/d1sneypartybr"
 };
 var FOTOS=[];for(var k=1;k<=9;k++)FOTOS.push("fotos/antr-"+k+".webp");
 var reduz=matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -491,14 +491,14 @@ var ADESIVO={
   bola:'<svg class="adesivo" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.500" fill="#ff8a1f" stroke="#1c1214" stroke-width="1.400"/><path d="M2.500 12h19M12 2.500v19M5 5.500q5 6.500 0 13M19 5.500q-5 6.500 0 13" stroke="#1c1214" stroke-width="1.100" fill="none"/></svg>'
 };
 var ARMARIOS=[
-  {id:"ingressos",rot:"Ingressos",ico:"ingressos",ad:"estrela"},
-  {id:"fotos",rot:"Fotos",ico:"fotos",ad:"coracao"},
+  {id:"ingressos",rot:"Ingressos",ico:"ingressos",ad:"coracao"},
+  {id:"fotos",rot:"Fotos",ico:"fotos",ad:"estrela",cor:"#ff5fa8"},
   {id:"playlist",rot:"Playlist",ico:"playlist",ad:"nota"},
   {id:"contato",rot:"Fale conosco",ico:"contato",ad:"raio"},
   {id:"redes",rot:"Redes",ico:"redes",ad:"bola"}
 ];
 $("#armarios").innerHTML=ARMARIOS.map(function(a){
-  return '<li><button class="armario" type="button" data-ir="'+a.id+'"><span class="porta">'+ADESIVO[a.ad]+CADEADO+ICO[a.ico].replace("<svg ",'<svg class="ico" ')+'<span class="nome">'+a.rot+'</span></span></button></li>';
+  return '<li><button class="armario" type="button" data-ir="'+a.id+'"'+(a.cor?' style="--cor:'+a.cor+'"':'')+'><span class="porta">'+ADESIVO[a.ad]+CADEADO+ICO[a.ico].replace("<svg ",'<svg class="ico" ')+'<span class="nome">'+a.rot+'</span></span></button></li>';
 }).join("")+'<li><a class="armario nost" href="./#nostalgias" id="armario-nost"><span class="porta">'+CADEADO+'<img src="logo-nostalgias.webp" alt=""><span class="nome">Nostalgias 2000</span></span></a></li>';
 
 /* ---------- fotos, playlists, redes ---------- */
