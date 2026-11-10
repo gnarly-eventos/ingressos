@@ -626,7 +626,7 @@ function drawLogin(){
 function startLogin(){ cancelAnimationFrame(lraf); setupLogin(); drawLogin(); }
 addEventListener("resize", () => { if (!festa) startLogin(); });
 document.addEventListener("visibilitychange", () => { if (!document.hidden && !festa){ cancelAnimationFrame(lraf); drawLogin(); } });
-document.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => { location.hash = b.dataset.go === "antr" ? "antr" : "nostalgias"; }));
+document.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => { if (b.dataset.go === "antr") location.href = "antr"; else location.hash = "nostalgias"; }));
 
 /* ---------- área de trabalho ---------- */
 function montarDesk(){
@@ -823,7 +823,7 @@ function montarMenu(){
       el("li", {}, el("button", {type:"button", onclick:() => abrir("chat")}, svg(ICON.chat), "Fale Conosco")),
       el("li", {}, el("a", {href:F.links.sympla, target:"_blank", rel:"noopener"}, svg(ICON.ingressos), "Todos os eventos no Sympla ↗")),
       el("hr"),
-      el("li", {}, el("button", {type:"button", onclick:() => { location.hash = outra === "antr" ? "antr" : "nostalgias"; }}, svg(ICON.playlist), "Ir para " + FESTAS[outra].nome)),
+      el("li", {}, el("button", {type:"button", onclick:() => { if (outra === "antr") location.href = "antr"; else location.hash = "nostalgias"; }}, svg(ICON.playlist), "Ir para " + FESTAS[outra].nome)),
       el("li", {}, el("button", {type:"button", onclick:() => { history.replaceState(null, "", location.pathname + location.search); rota(); }}, svg(ICON.sair), "Sair (escolher festa)"))
     ));
 }
@@ -835,6 +835,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape"){ if (!$("#me
 /* ---------- rotas: #antr  #nostalgias ---------- */
 function rota(){
   const h = location.hash.replace("#", "").toLowerCase();
+  if (h === "antr"){ location.replace("antr"); return; }   /* a ANTR tem página própria (antr.html) */
   const nova = h === "antr" ? "antr" : (h === "nostalgias" || h === "nost") ? "nost" : null;
   fecharMenu();
   if (!nova){ festa = null; cancelAnimationFrame(raf); $("#desk").hidden = true; $("#login").hidden = false; document.body.style.background = "var(--login-a)"; startLogin(); return; }
