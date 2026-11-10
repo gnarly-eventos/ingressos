@@ -176,6 +176,15 @@ section{position:relative;scroll-margin-top:0}
 .aviso{margin:0;background:var(--tinta);color:var(--branco);text-align:center;padding:8px 12px 9px;font-size:11.5px;line-height:1.35;box-shadow:2px 4px 8px rgba(40,20,0,.4)}
 .aviso b{display:block;font-family:var(--f-time);font-weight:400;font-size:14px;letter-spacing:.08em;color:var(--dourado)}
 .mural .todos{align-self:center}
+/* cartão do Réveillon (evento da Nostalgias 2000 divulgado aqui) */
+.virada{position:relative;display:grid;grid-template-columns:86px minmax(0,1fr);gap:12px;align-items:center;margin-top:8px;padding:20px 13px 13px;background:#ffd60a;color:#3b2416;border:3px solid #3b2416;border-radius:12px;box-shadow:5px 5px 0 #3b2416}
+.virada .faixa{position:absolute;left:12px;top:-14px;font-family:var(--f-time);font-size:14px;letter-spacing:.08em;line-height:1;padding:6px 12px 5px;border:3px solid #3b2416;border-radius:999px;background:var(--vermelho);color:var(--branco);transform:rotate(-2deg);animation:virada 1.6s ease-in-out infinite alternate}
+@keyframes virada{to{transform:rotate(1deg) scale(1.06)}}
+.virada img{width:100%;height:auto}
+.virada .info{gap:1px}
+.virada .cidade{font-size:21px}
+.virada .onde{color:#3b2416}
+.virada .comprar{background:#7b2cbf;border-color:#3b2416;box-shadow:0 3px 0 #3b2416}
 
 /* ---------- anuário (fotos) ---------- */
 .anuario{background:var(--creme);padding-block:24px 26px;border-top:10px solid var(--vinho);border-bottom:10px solid var(--vinho)}
@@ -301,6 +310,7 @@ section{position:relative;scroll-margin-top:0}
     <div class="dentro">
       <h2 class="titulo"><span>Próximas festas</span></h2>
       <ul class="folhas" id="folhas"><li class="vazio">Carregando datas…</li></ul>
+      <div id="virada" hidden></div>
       <a class="btn todos" id="sympla-geral" href="https://www.sympla.com.br/produtor/d1sneypartybr" target="_blank" rel="noopener">Ver tudo no Sympla ↗</a>
       <a class="recado" id="ir-nost" href="./#nostalgias"><img src="logo-nostalgias.webp" alt=""><span>Procurando a Nostalgias 2000?</span><span class="s" aria-hidden="true">›</span></a>
       <p class="aviso"><b>PARA MAIORES DE 18 ANOS</b>Obrigatório apresentação de documento original com foto</p>
@@ -574,6 +584,22 @@ $("#form-msg").addEventListener("submit",function(e){
   $("#depois").innerHTML='<p>Pronto! Abrimos o WhatsApp com a sua mensagem, é só enviar por lá.</p><a class="retry" href="'+esc(url)+'" target="_blank" rel="noopener">Não abriu? Toque aqui</a>';
 });
 
+/* ---------- Réveillon (de qualquer festa da casa) em destaque no mural ---------- */
+function pintaVirada(lista,aj){
+  var agora=Date.now();
+  var v=lista.filter(function(e){var a=aj[e.id]||{};return e.publicado&&!e.cancelado&&!a.ocultar&&/r[eé]veillon|ano novo/i.test(e.nome)&&!/night\s*to\s*remember/i.test(e.nome)&&new Date(e.fim).getTime()>agora})
+    .sort(function(a,b){return new Date(a.inicio)-new Date(b.inicio)});
+  var box=$("#virada");box.hidden=!v.length;
+  box.innerHTML=v.map(function(e){
+    var a=aj[e.id]||{},ini=new Date(e.inicio),off=a.selo==="esgotado";
+    var quando=fmt(ini,{weekday:"short"}).replace(".","").toUpperCase()+" "+fmt(ini,{day:"2-digit"})+" "+fmt(ini,{month:"short"}).replace(".","").toUpperCase()+" · "+fmt(ini,{hour:"2-digit",minute:"2-digit"}).replace(":00","h").replace(":","h");
+    return '<div class="virada"><span class="faixa">★ RÉVEILLON</span><img src="logo-nostalgias.webp" alt="Nostalgias 2000"><div class="info">'+
+      '<h3 class="cidade">'+esc(e.cidade)+'</h3><span class="sub">'+esc(a.titulo||(/open\s*bar/i.test(e.nome)?"Open bar":"Nostalgias 2000"))+'</span><span class="onde">'+quando+" · "+esc(e.local.trim())+'</span>'+
+      '<div class="pe">'+(a.selo==="ultimos"?'<span class="selo">Últimos ingressos</span>':'')+'<a class="comprar'+(off?' off':'')+'" href="'+esc(e.link||linkSympla(e.id))+'" target="_blank" rel="noopener" data-ev="'+esc(e.cidade)+' Réveillon" data-id="'+esc(e.id)+'"'+(off?' aria-disabled="true"':'')+'>'+(off?'Esgotado':'Comprar ↗')+'</a></div></div></div>';
+  }).join("");
+  setTimeout(medeRolagem,60);
+}
+
 /* ---------- início ---------- */
 Promise.all([
   fetch("eventos.json?v="+Date.now()).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
@@ -581,6 +607,7 @@ Promise.all([
 ]).then(function(res){
   EVENTOS=prepara((res[0]&&res[0].eventos)||[],(res[1]&&res[1].eventos)||{});
   pinta();
+  pintaVirada((res[0]&&res[0].eventos)||[],(res[1]&&res[1].eventos)||{});
   var h=location.hash.slice(1);if(SECOES.indexOf(h)>=0)setTimeout(function(){ir(h,true)},80);
   track("abrir_festa");
 });
