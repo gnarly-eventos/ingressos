@@ -130,6 +130,8 @@ a{color:inherit}
 .pill i{width:7px;height:7px;border-radius:50%;background:#45e06b;box-shadow:0 0 8px #45e06b;animation:blink 2s ease-in-out infinite}
 @keyframes blink{50%{opacity:.35}}
 .user .go{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:20px;color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)}
+.idade{margin:6px 0 0;text-align:center;color:var(--login-dim);font-size:12.5px;line-height:1.5}
+.idade b{display:block;color:var(--login-fg);font-weight:900;letter-spacing:.12em;font-size:12px}
 .login-foot{padding-block:12px calc(14px + env(safe-area-inset-bottom,0px));padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;justify-content:flex-end;align-items:flex-end;gap:12px;color:var(--login-dim);font-size:12px;letter-spacing:.02em}
 .login .tip{max-width:240px}
 
@@ -363,6 +365,7 @@ a{color:inherit}
         <span><b>Nostalgias 2000</b><span class="pill"><i></i><span id="cnt-nost">Carregando datas…</span></span></span>
         <span class="go" aria-hidden="true">›</span>
       </button>
+      <p class="idade"><b>PARA MAIORES DE 18 ANOS</b>Obrigatório apresentação de documento original com foto</p>
     </div>
     <footer class="login-foot">
       <div class="tip" id="login-tip">
@@ -719,8 +722,7 @@ function corpoIngressos(){
     ));
   }
   wrap.append(el("div", {style:"flex:1"}, ul));
-  const at = ATUALIZADO_EM ? new Date(ATUALIZADO_EM) : null;
-  wrap.append(el("div", {class:"status"}, el("span", {}, `${lista.length} ${lista.length === 1 ? "evento" : "eventos"}`), el("span", {}, at ? `Sympla · atualizado ${fmt(at, {day:"2-digit", month:"2-digit"})} às ${fmt(at, {hour:"2-digit", minute:"2-digit"})}` : "Sympla")));
+  wrap.append(el("div", {class:"status"}, el("span", {}, `${lista.length} ${lista.length === 1 ? "evento" : "eventos"} · PARA MAIORES DE 18 ANOS`)));
   return wrap;
 }
 
