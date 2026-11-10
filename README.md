@@ -1,9 +1,9 @@
 # Ingressos · A Night To Remember e Nostalgias 2000
 
-Página de links da bio: **https://gnarly-eventos.github.io/ingressos/**
+Página de links da bio: **https://ingressos.gnarlyeventos.com.br/**
 
-- Direto na A Night To Remember: `https://gnarly-eventos.github.io/ingressos/#antr`
-- Direto no Nostalgias 2000: `https://gnarly-eventos.github.io/ingressos/#nostalgias`
+- Direto na A Night To Remember: `https://ingressos.gnarlyeventos.com.br/#antr`
+- Direto no Nostalgias 2000: `https://ingressos.gnarlyeventos.com.br/#nostalgias`
 
 ## Como os eventos atualizam
 
