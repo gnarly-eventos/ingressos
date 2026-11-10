@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Ingressos · A Night To Remember e Nostalgias 2000">
 <meta property="og:description" content="Escolha seu evento e garanta seu ingresso.">
-<meta property="og:image" content="https://ingressos.gnarlyeventos.com.br/og.jpg">
+<meta property="og:image" content="https://ingressos.gnarlyeventos.com.br/og-festas.jpg">
 <meta property="og:url" content="https://ingressos.gnarlyeventos.com.br/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2l2.6 6.6L21 9.3l-5 4.4 1.6 6.8L12 17l-5.6 3.5L8 13.7 3 9.3l6.4-.7z' fill='%23ffd60a' stroke='%233b2416' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -23,7 +23,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Cinzel:wght@600;700&family=Nunito:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Cinzel:wght@600;700&family=Graduate&family=Orbitron:wght@700;900&family=Nunito:wght@400;600;700;800;900&display=swap">
 <style>
 /* Layout: um "computador dos anos 2000" em tela cheia. Login escolhe a festa,
    e a área de trabalho, as janelas e a barra de tarefas trocam de identidade.
@@ -134,6 +134,46 @@ a{color:inherit}
 .idade b{display:block;color:var(--login-fg);font-weight:900;letter-spacing:.12em;font-size:12px}
 .login-foot{padding-block:12px calc(14px + env(safe-area-inset-bottom,0px));padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;justify-content:flex-end;align-items:flex-end;gap:12px;color:var(--login-dim);font-size:12px;letter-spacing:.02em}
 .login .tip{max-width:240px}
+
+/* ---------- tela de escolha: duas metades, cada festa com a cara dela ---------- */
+.escolha{display:flex;flex-direction:column;background:#0d0d14}
+.escolha > canvas{z-index:3}
+.metades{flex:1;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) auto minmax(0,1fr)}
+.metade{position:relative;overflow:hidden;border:0;margin:0;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:inherit;text-align:center;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));transition:filter .15s}
+.metade:active{filter:brightness(1.12)}
+.m-titulo{position:relative;z-index:4;margin:-9px -8px;padding:11px 16px 10px;background:#0d0d14;color:#fff;transform:rotate(-2deg);box-shadow:0 -4px 0 #f2b632,0 4px 0 #ff2e4d,0 0 26px rgba(0,0,0,.5)}
+.escolha .m-titulo h1{margin:0;font-size:clamp(24px,7.400vw,38px);line-height:1;letter-spacing:.01em;filter:none;animation:none;background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#fff}
+.m-pe{position:relative;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 10px}
+.m-cnt{font-size:13px;font-weight:900}
+.m-go{font-weight:900;font-size:16px;line-height:1;padding:11px 18px;border-radius:999px;border:3px solid #1c1214;box-shadow:0 4px 0 #1c1214}
+/* A Night To Remember: ginásio do colégio */
+.m-antr{padding-top:calc(34px + env(safe-area-inset-top,0px));padding-bottom:22px;background:linear-gradient(180deg,#4a0510 0,#7d0a1c 34%,#c8102e 82%);color:#fffdf7}
+.m-arq{position:absolute;left:0;right:0;top:0;height:62%;opacity:.85;
+  background:radial-gradient(circle,#fffdf7 0 3px,transparent 3.600px) 2px 4px/26px 25px,radial-gradient(circle,#f2b632 0 3px,transparent 3.600px) 15px 4px/26px 25px,radial-gradient(circle,#ff8fa0 0 3px,transparent 3.600px) 9px 16px/39px 25px,repeating-linear-gradient(180deg,#5d0715 0 22px,#3d040d 22px 25px);
+  -webkit-mask-image:linear-gradient(180deg,#000 45%,transparent);mask-image:linear-gradient(180deg,#000 45%,transparent)}
+.m-band{position:absolute;left:0;right:0;top:env(safe-area-inset-top,0px);height:30px;border-top:5px solid #1c1214;filter:drop-shadow(0 3px 0 rgba(0,0,0,.25));
+  background:linear-gradient(135deg,#fffdf7 25%,transparent 25%) 0 0/40px 30px,linear-gradient(225deg,#fffdf7 25%,transparent 25%) 0 0/40px 30px,linear-gradient(135deg,#f2b632 25%,transparent 25%) 20px 0/40px 30px,linear-gradient(225deg,#f2b632 25%,transparent 25%) 20px 0/40px 30px}
+.m-flam{position:relative;width:min(70%,300px);padding:4px 4px 6px;background:#f2b632;clip-path:polygon(0 0,100% 0,100% 80%,50% 100%,0 80%);transform-origin:50% 0;animation:pendura 4s ease-in-out infinite alternate;filter:drop-shadow(0 5px 0 rgba(40,0,6,.4))}
+@keyframes pendura{from{transform:rotate(-1.600deg)}to{transform:rotate(1.600deg)}}
+.m-flam > span{display:block;padding:10px 10px 24px;background:linear-gradient(180deg,#b50e29,#8a0a1e);clip-path:polygon(0 0,100% 0,100% 80%,50% 100%,0 80%)}
+.m-flam img{display:block;width:100%;height:auto;filter:drop-shadow(0 3px 0 rgba(40,0,6,.6))}
+.m-placar{position:relative;display:flex;flex-direction:column;gap:3px;background:#150a05;border-radius:10px;padding:7px 14px 8px;box-shadow:0 0 0 3px #4a4a4a,0 0 0 6px #1c1214,0 0 22px 2px rgba(255,176,0,.3)}
+.m-placar small{font-family:"Graduate","Rockwell",Georgia,serif;font-size:11.500px;letter-spacing:.18em;color:#fffdf7}
+.m-placar b{font-family:"Orbitron","Courier New",monospace;font-weight:900;font-size:clamp(15px,4.600vw,21px);letter-spacing:.03em;line-height:1.1;color:#ffb000;text-shadow:0 0 10px rgba(255,176,0,.75);overflow-wrap:anywhere}
+.m-antr .m-go{background:#fffdf7;color:#c8102e;font-family:"Graduate","Rockwell",Georgia,serif;font-weight:400;letter-spacing:.05em}
+/* Nostalgias 2000: raios amarelos e adesivo */
+.m-nost{padding-top:22px;padding-bottom:16px;color:var(--n-brown);
+  background:radial-gradient(60% 55% at 50% 46%,rgba(255,143,199,.9) 0%,rgba(255,143,199,0) 70%),repeating-conic-gradient(from 0deg at 50% 46%,var(--n-yellow) 0 9deg,var(--n-yellow-2) 9deg 18deg)}
+.m-logo{position:relative;width:min(66%,280px);height:auto;filter:drop-shadow(0 4px 0 rgba(59,36,22,.3));animation:pulsa 2.600s ease-in-out infinite alternate}
+@keyframes pulsa{to{transform:scale(1.04) rotate(-1.500deg)}}
+.m-adesivo{position:relative;display:flex;flex-direction:column;gap:2px;background:var(--n-cream);border:3px solid var(--n-brown);border-radius:12px;padding:6px 14px 7px;box-shadow:4px 4px 0 var(--n-brown);transform:rotate(1.500deg)}
+.m-adesivo small{font-size:11px;font-weight:900;letter-spacing:.14em;color:var(--n-purple)}
+.m-adesivo b{font-family:var(--f-nost);font-weight:400;font-size:clamp(14px,4.300vw,19px);line-height:1.1;color:var(--n-red);overflow-wrap:anywhere}
+.m-nost .m-go{background:var(--n-purple);color:var(--n-yellow);font-family:var(--f-nost);font-weight:400;border-color:var(--n-brown);box-shadow:0 4px 0 var(--n-brown)}
+.escolha .idade{flex:none;margin:0;padding:7px 14px calc(8px + env(safe-area-inset-bottom,0px));background:#0d0d14;color:#cfcbe0;font-size:11.500px;line-height:1.35}
+.escolha .idade b{color:#fff}
+@media (max-height:640px){ .m-flam{width:min(52%,220px)} .m-logo{width:min(50%,210px)} .metade{gap:7px} }
 
 /* mascote + balão */
 .tip{position:relative;display:flex;align-items:flex-end;gap:6px}
@@ -348,32 +388,23 @@ a{color:inherit}
 <body>
 <div class="app" id="app">
   <!-- LOGIN -->
-  <section class="login" id="login" aria-label="Escolha sua festa">
-    <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
-    <div class="floor"></div><div class="texture"></div><div class="grain"></div>
+  <section class="login escolha" id="login" aria-label="Escolha sua festa">
+    <div class="metades">
+      <button class="metade m-antr" data-go="antr" type="button">
+        <span class="m-arq" aria-hidden="true"></span><span class="m-band" aria-hidden="true"></span>
+        <span class="m-flam"><span><img src="logo-antr.webp" alt="A Night To Remember"></span></span>
+        <span class="m-placar"><small id="rot-antr">PRÓXIMA DATA</small><b id="prox-antr">CARREGANDO…</b></span>
+        <span class="m-pe"><span class="m-cnt" id="cnt-antr"></span><span class="m-go">ENTRAR ›</span></span>
+      </button>
+      <div class="m-titulo"><h1>Escolha seu evento</h1></div>
+      <button class="metade m-nost" data-go="nost" type="button">
+        <img class="m-logo" src="logo-nostalgias.webp" alt="Nostalgias 2000">
+        <span class="m-adesivo"><small id="rot-nost">PRÓXIMA DATA</small><b id="prox-nost">CARREGANDO…</b></span>
+        <span class="m-pe"><span class="m-cnt" id="cnt-nost"></span><span class="m-go">ENTRAR ›</span></span>
+      </button>
+    </div>
+    <p class="idade"><b>PARA MAIORES DE 18 ANOS</b>Obrigatório apresentação de documento original com foto</p>
     <canvas id="login-sky" aria-hidden="true"></canvas>
-    <div class="login-shell">
-    <div class="login-mid">
-      <h1>Escolha seu evento</h1>
-      <button class="user" data-go="antr" type="button">
-        <span class="avatar antr"><img src="logo-antr.webp" alt=""></span>
-        <span><b>A Night To Remember</b><span class="pill"><i></i><span id="cnt-antr">Carregando datas…</span></span></span>
-        <span class="go" aria-hidden="true">›</span>
-      </button>
-      <button class="user" data-go="nost" type="button">
-        <span class="avatar nost"><img src="logo-nostalgias.webp" alt=""></span>
-        <span><b>Nostalgias 2000</b><span class="pill"><i></i><span id="cnt-nost">Carregando datas…</span></span></span>
-        <span class="go" aria-hidden="true">›</span>
-      </button>
-      <p class="idade"><b>PARA MAIORES DE 18 ANOS</b>Obrigatório apresentação de documento original com foto</p>
-    </div>
-    <footer class="login-foot">
-      <div class="tip" id="login-tip">
-        <div class="balloon">Parece que você quer ingressos! Clique na sua festa para ver as próximas datas.</div>
-        <svg class="mascot" viewBox="0 0 64 64" aria-hidden="true"><use href="#mascot"/></svg>
-      </div>
-    </footer>
-    </div>
   </section>
 
   <!-- ÁREA DE TRABALHO -->
@@ -855,7 +886,11 @@ const DADOS = Promise.all([
   AJUSTES = (aj && aj.eventos) || {};
   for (const f of ["antr","nost"]) {
     const n = eventosDa(f).length;
-    $("#cnt-" + f).textContent = n ? `${n} ${n === 1 ? "data à venda" : "datas à venda"}` : "Novas datas em breve";
+    const lista = eventosDa(f), p = lista[0];
+    $("#cnt-" + f).textContent = n ? `${n} ${n === 1 ? "data à venda" : "datas à venda"}` : "";
+    $("#rot-" + f).textContent = n ? "PRÓXIMA DATA" : "EM BREVE";
+    if (p){ const d = new Date(p.inicio); $("#prox-" + f).textContent = `${p.cidade.toUpperCase()} · ${fmt(d,{weekday:"short"}).replace(".","").toUpperCase()} ${fmt(d,{day:"2-digit"})} ${fmt(d,{month:"short"}).replace(".","").toUpperCase()}`; }
+    else $("#prox-" + f).textContent = "NOVAS DATAS";
   }
 });
 addEventListener("hashchange", rota);
