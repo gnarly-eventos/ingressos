@@ -9,7 +9,9 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Ingressos · A Night To Remember">
 <meta property="og:description" content="Escolha sua cidade e garanta seu ingresso.">
-<meta property="og:image" content="https://ingressos.gnarlyeventos.com.br/og.jpg">
+<meta property="og:image" content="https://ingressos.gnarlyeventos.com.br/og-antr.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="https://ingressos.gnarlyeventos.com.br/antr">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2l2.6 6.6L21 9.3l-5 4.4 1.6 6.8L12 17l-5.6 3.5L8 13.7 3 9.3l6.4-.7z' fill='%23ffd62b' stroke='%230a1150' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -221,17 +223,19 @@ a{color:inherit}
 .rede:active{transform:translateY(3px);box-shadow:0 1px 0 var(--tinta)}
 
 /* ---------- vinheta de abertura ---------- */
-.vinheta{position:fixed;inset:0;z-index:60;overflow:hidden;background:var(--azul);display:grid;place-items:center;transition:transform .45s cubic-bezier(.7,0,.3,1)}
-.vinheta.fim{transform:translateY(-102%)}
-.vinheta i{position:absolute;left:-30%;width:160%;height:26%;transform:translateX(-110%) rotate(-9deg);animation:varre .7s cubic-bezier(.2,.8,.2,1) forwards}
-.vinheta i:nth-child(1){top:-6%;background:var(--ciano)}
-.vinheta i:nth-child(2){top:20%;background:var(--lima);animation-delay:.08s}
-.vinheta i:nth-child(3){top:56%;background:var(--laranja);animation-delay:.16s}
-.vinheta i:nth-child(4){top:82%;background:var(--magenta);animation-delay:.24s}
-@keyframes varre{to{transform:translateX(0) rotate(-9deg)}}
-.vinheta img{position:relative;width:min(78%,420px);height:auto;filter:drop-shadow(0 8px 0 rgba(6,12,70,.5));transform:scale(.2) rotate(-8deg);opacity:0;animation:logo .55s cubic-bezier(.3,1.6,.5,1) .35s forwards}
+.vinheta{position:fixed;inset:0;z-index:60;overflow:hidden;display:grid;place-items:center}
+.vinheta .pano{position:absolute;top:0;bottom:0;width:50.500%;transition:transform 1s cubic-bezier(.7,0,.25,1);
+  background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 18%,transparent 72%,rgba(0,0,0,.5)),repeating-linear-gradient(90deg,#c9141c 0 22px,#8f0b12 22px 36px,#e02b30 36px 54px,#7a0910 54px 66px)}
+.vinheta .pano.e{left:0;transform-origin:0 50%;box-shadow:inset -14px 0 18px -8px rgba(0,0,0,.55)}
+.vinheta .pano.d{right:0;transform-origin:100% 50%;box-shadow:inset 14px 0 18px -8px rgba(0,0,0,.55)}
+.vinheta .sanefa{position:absolute;z-index:1;left:0;right:0;top:0;height:46px;transition:transform .6s ease .5s;
+  background:radial-gradient(circle at 50% 0,#a50f16 0 30px,transparent 31px) 0 16px/60px 46px repeat-x,linear-gradient(#7a0910,#7a0910) 0 0/100% 18px no-repeat;border-bottom:0;filter:drop-shadow(0 3px 0 #f3c64a)}
+.vinheta.abre .pano{transform:scaleX(0)}
+.vinheta.abre .sanefa{transform:translateY(-110%)}
+.vinheta img{position:relative;z-index:2;width:min(78%,420px);height:auto;filter:drop-shadow(0 8px 0 rgba(40,0,4,.55));transform:scale(.2) rotate(-8deg);opacity:0;animation:logo .5s cubic-bezier(.3,1.6,.5,1) .12s forwards;transition:opacity .45s,scale .45s}
+.vinheta.abre img{opacity:0!important;scale:1.15}
 @keyframes logo{to{transform:none;opacity:1}}
-.vinheta button{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));font-weight:900;padding:8px 16px;border-radius:999px;border:3px solid var(--tinta);background:var(--papel)}
+.vinheta button{position:absolute;z-index:3;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));font-weight:900;padding:8px 16px;border-radius:999px;border:3px solid var(--tinta);background:var(--papel)}
 
 @media (max-height:620px){ .logo{max-width:200px} .adesivo{width:36px;height:36px} .app{gap:7px} }
 @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important} }
@@ -278,7 +282,7 @@ a{color:inherit}
 </div>
 
 <div class="vinheta" id="vinheta" hidden>
-  <i></i><i></i><i></i><i></i>
+  <span class="pano e"></span><span class="pano d"></span><span class="sanefa"></span>
   <img src="logo-antr.webp" alt="">
   <button type="button" id="pular">Pular</button>
 </div>
@@ -561,8 +565,8 @@ ligarFundo();
 (function(){
   const v = $("#vinheta"); if (reduceMotion) return;
   v.hidden = false; let feito = false;
-  const fim = () => { if (feito) return; feito = true; v.classList.add("fim"); setTimeout(() => { v.hidden = true; }, 500); };
-  v.addEventListener("click", fim); setTimeout(fim, 1500);
+  const fim = () => { if (feito) return; feito = true; v.classList.add("abre"); setTimeout(() => { v.hidden = true; }, 1150); };
+  v.addEventListener("click", fim); setTimeout(fim, 1100);
 })();
 setTimeout(() => { if ($("#balao") && canalAtual === "ingressos") { /* a dica some sozinha */ $("#balao").hidden = true; $("#bug").setAttribute("aria-expanded", "false"); } }, 9000);
 
