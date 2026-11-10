@@ -425,13 +425,16 @@ const FOTOS = {
   nost: Array.from({length: 9}, (_, i) => `fotos/nost-${i+1}.webp`)
 };
 
+const WHATSAPP_NUM = "5511957293333";
+const WHATSAPP_TXT = "(11) 95729-3333";
+
 const FESTAS = {
   antr: {
     nome: "A Night To Remember", curto: "ANTR", logo: "logo-antr.webp",
     dica: "Clique em Ingressos e garanta a sua noite mágica!",
     links: {
       sympla: "https://www.sympla.com.br/produtor/d1sneypartybr",
-      whatsapp: "https://wa.me/message/3FH3SHZPYTRVD1",
+      whatsapp: "https://wa.me/5511957293333",
       playlist: [
         {nome: "Disney Channel (2000's)", url: "https://open.spotify.com/playlist/4oZ6oYQy5gxJBJWxAl0yPw"},
         {nome: "Disney Channel Hits", url: "https://open.spotify.com/playlist/1Oe0k5VFz2LVNAmntp7Ne2"}
@@ -449,7 +452,7 @@ const FESTAS = {
     dica: "Bora reviver os anos 2000? Os ingressos estão aqui!",
     links: {
       sympla: "https://www.sympla.com.br/produtor/d1sneypartybr",
-      whatsapp: "https://wa.me/message/3FH3SHZPYTRVD1",
+      whatsapp: "https://wa.me/5511957293333",
       playlist: [
         {nome: "Nostalgias 2000 Party", url: "https://open.spotify.com/playlist/2Ltti915Alj1PCmUQrgUaD"}
       ],
@@ -722,30 +725,32 @@ function corpoIngressos(){
 
 function corpoChat(){
   const F = FESTAS[festa];
+  const wa = txt => "https://wa.me/" + WHATSAPP_NUM + "?text=" + encodeURIComponent(txt);
+  const padrao = `Olá! Vim pela página de ingressos da ${F.nome}. Quero informações da edição de: `;
   const msgs = el("div", {class:"msgs", "aria-live":"polite"});
   const typing = el("div", {class:"typing"}, `${F.nome} está digitando…`);
-  const bot = txt => el("div", {class:"msg bot"}, el("div", {class:"who"}, `${F.nome} diz:`), el("div", {}, txt));
+  const bot = (...linhas) => el("div", {class:"msg bot"}, el("div", {class:"who"}, `${F.nome} diz:`), ...linhas.map(l => el("div", {}, l)));
+  const botaoWa = txt => el("a", {class:"btn wa-go", href:wa(txt), target:"_blank", rel:"noopener", onclick:() => track("clique_whatsapp", {festa})}, "Sim, me transfere ↗");
   msgs.append(el("div", {class:"typing", style:"opacity:.5"}, `${F.nome} acabou de entrar na conversa.`), typing);
-  setTimeout(() => { typing.replaceWith(bot("Oi! Como podemos ajudar? Fale com a gente sobre ingressos, aniversários e listas.")); }, reduceMotion ? 0 : 900);
-  const input = el("input", {id:"chat-msg", type:"text", placeholder:"Digite uma mensagem…", autocomplete:"off", "aria-label":"Mensagem"});
+  setTimeout(() => {
+    typing.replaceWith(bot(`Oi! Nosso atendimento será no WhatsApp ${WHATSAPP_TXT}. Podemos te transferir?`, "Ao mandar mensagem lá já diga para qual cidade e edição deseja informações. :)"));
+    msgs.append(botaoWa(padrao));
+  }, reduceMotion ? 0 : 900);
+  const input = el("input", {id:"chat-msg", type:"text", placeholder:"Ou escreva sua mensagem aqui…", autocomplete:"off", "aria-label":"Mensagem"});
   const form = el("form", {class:"chat-form"}, input, el("button", {class:"btn", type:"submit"}, "Enviar"));
   form.addEventListener("submit", ev => {
     ev.preventDefault();
     const t = input.value.trim(); if (!t) return;
-    let copiou = false;
-    try { navigator.clipboard.writeText(t).then(() => {}, () => {}); copiou = true; } catch(e) {}
     msgs.append(el("div", {class:"msg me"}, el("div", {class:"who"}, "Você diz:"), el("div", {}, t)));
     input.value = "";
-    setTimeout(() => {
-      msgs.append(bot(copiou ? "Vamos continuar no nosso WhatsApp! Sua mensagem foi copiada, é só colar lá." : "Vamos continuar no nosso WhatsApp! É só mandar sua mensagem por lá."),
-        el("a", {class:"btn wa-go", href:F.links.whatsapp, target:"_blank", rel:"noopener", onclick:() => track("clique_whatsapp", {festa})}, "Abrir WhatsApp ↗"));
-      msgs.scrollTop = msgs.scrollHeight;
-    }, reduceMotion ? 0 : 500);
+    const link = el("a", {class:"btn wa-go", href:wa(t), target:"_blank", rel:"noopener", onclick:() => track("clique_whatsapp", {festa, origem:"mensagem"})}, "Enviar no WhatsApp ↗");
+    msgs.append(bot("Perfeito! Sua mensagem já vai escrita no WhatsApp, é só enviar."), link);
+    msgs.scrollTop = msgs.scrollHeight;
   });
   return el("div", {class:"chat"},
     el("div", {class:"chat-head"}, el("span", {class:"avatar " + festa}, el("img", {src:F.logo, alt:""})),
       el("div", {}, el("b", {}, F.nome), el("small", {}, el("i"), "Online"))),
-    msgs, form, el("div", {class:"chat-note"}, "As mensagens continuam no WhatsApp."));
+    msgs, form, el("div", {class:"chat-note"}, `Atendimento pelo WhatsApp ${WHATSAPP_TXT}`));
 }
 
 function corpoPlaylist(){
