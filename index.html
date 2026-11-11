@@ -497,6 +497,7 @@ const FESTAS = {
       whatsapp: "https://wa.me/5511957293333",
       playlist: [
         {nome: "Nostalgias 2000 Party", url: "https://open.spotify.com/playlist/2Ltti915Alj1PCmUQrgUaD"},
+        {nome: "Nostalgias 2000 Party", url: "https://link.deezer.com/s/34VNMe6kYcmYcP5uqzrWS", app: "Deezer"},
         {nome: "Playlist 2010", url: "https://link.deezer.com/s/34VTow20OJyaKK0XFrTFh", app: "Deezer"}
       ],
       album: "https://www.facebook.com/61567669948169/photos/",
@@ -805,7 +806,7 @@ function corpoPlaylist(){
   const F = FESTAS[festa], listas = F.links.playlist || [];
   return el("div", {class:"player"},
     el("div", {class:"cd", role:"img", "aria-label":"CD girando"}),
-    el("div", {class:"lcd"}, el("span", {}, "♪ " + listas.map(l => l.nome).join(" ♪ ") + " ♪ Tocando agora ♪")),
+    el("div", {class:"lcd"}, el("span", {}, "♪ " + [...new Set(listas.map(l => l.nome))].join(" ♪ ") + " ♪ Tocando agora ♪")),
     el("div", {class:"pl-list"}, listas.map(l =>
       el("a", {class:"btn", href:l.url, target:"_blank", rel:"noopener", onclick:() => track("clique_playlist", {festa, playlist:l.nome})},
         el("span", {}, l.nome, el("br"), el("small", {}, "Ouvir no " + (l.app || "Spotify"))), "↗"))));
